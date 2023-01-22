@@ -102,25 +102,29 @@
                                     <form>
                                         <p>Please register your account</p>
 
+                                        
 
+                                        <form action="" method="POST">
+                                            {% csrf_token %}
+                                        
                                         <div class="form-outline mb-4">
-                                            <input type="text" id="form2Example11" class="form-control"
+                                            <input type="text" name="firstname" id="form2Example11" class="form-control"
                                                 placeholder="First Name" />
-                                            <label class="form-label" for="form2Example11">First Name</label>
+                                            <label class="form-label" for="form2Example11"></label>
                                         </div>
                                         <div class="form-outline mb-4">
-                                            <input type="text" id="form2Example11" class="form-control"
+                                            <input type="text" name="lastname" id="form2Example11" class="form-control"
                                                 placeholder="Last Name" />
-                                            <label class="form-label" for="form2Example11">Last Name</label>
+                                            <label class="form-label" for="form2Example11"></label>
                                         </div>
                                         <div class="form-outline mb-4">
-                                            <input type="email" id="form2Example11" class="form-control"
+                                            <input type="email" name="Email" id="form2Example11" class="form-control"
                                                 placeholder="Phone number or email address" />
-                                            <label class="form-label" for="form2Example11">Email</label>
+                                            <label class="form-label" for="form2Example11"></label>
                                         </div>
 
                                         <div class="form-outline mb-4">
-                                            <input type="password" id="form2Example22" class="form-control" />
+                                            <input type="password" name="password" id="form2Example22" class="form-control" />
                                             <label class="form-label" for="form2Example22">Password</label>
                                         </div>
 
