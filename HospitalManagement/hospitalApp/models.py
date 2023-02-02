@@ -7,6 +7,7 @@ from django.urls import reverse
 
 
 
+
 # class Patient(models.Model):
 #     first_name = models.CharField(max_length=255)
 #     last_name = models.CharField(max_length=255)
@@ -45,4 +46,15 @@ class Appointment(models.Model):
 #     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
 #     def __str__(self):
 #         return f'{self.medication} prescribed to {self.patient} by {self.doctor}'
+
+
+
+# this one is for contact us like
+class contactEnquiry(models.Model):
+    your_name =models.CharField(max_length=50)
+    your_email =models.CharField(max_length=100)
+    subject =models.CharField(max_length=50)
+    messages =models.CharField(max_length=500)
+
+
 

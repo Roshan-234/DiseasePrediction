@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.contrib.auth.models import User, auth
 from django.http import HttpResponse
 from django.contrib import messages
+from hospitalApp.models import contactEnquiry
 from .models import Appointment
 # from .models import Patient
 from django.contrib.auth.decorators import login_required
@@ -10,6 +11,20 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 def home(request):
     return render(request,'home.html',{})
+
+# this is for contact us form
+def saveEnquiry(request):
+    if request.method == "POST":
+        print(request.POST)
+        name = request.POST.get('name')
+        emaill = request.POST.get('email')
+        subjectt = request.POST.get('subject')
+        messagess = request.POST.get('message')
+        # here left side is the model field name .........
+        en=contactEnquiry(your_name = name, your_email = emaill, subject = subjectt, messages = messagess)
+        en.save()
+    return render(request,"contact.html")
+
 
 
 def signin(request):
