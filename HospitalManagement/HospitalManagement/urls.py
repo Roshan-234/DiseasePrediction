@@ -20,5 +20,6 @@ from hospitalApp import views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('saveenquiry/',views.saveEnquiry, name="saveenquiry"),
+    path('appointment/',views.save_appointment, name="appointment"),
     path('',include('hospitalApp.urls')),
 ]
