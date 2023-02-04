@@ -2,6 +2,10 @@ from profile import Profile
 from django.shortcuts import render,HttpResponse
 from django.contrib.auth.models import User, auth
 from django.http import HttpResponse
+from django.shortcuts import  render, redirect
+from .forms import signUpForm
+from django.contrib.auth import login
+from django.contrib import messages
 from django.contrib import messages
 from django.utils import timezone
 from hospitalApp.models import contactEnquiry
@@ -12,6 +16,22 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 def home(request):
     return render(request,'home.html',{})
+
+
+def diabetes(request):
+    return render(request,'diabetes.html',{})
+
+
+def braintumor(request):
+    return render(request,'braintumor.html',{})
+
+
+def heartdisease(request):
+    return render(request,'heartdisease.html',{})
+
+
+def breastcancer(request):
+    return render(request,'breastcancer.html',{})
 
 def appointment(request):
     return render(request,'appointment.html',{})
@@ -75,42 +95,23 @@ def signin(request):
     # else:
     
 
-     return render(request,'home.html',{})
+     return render(request,'signin.html',{})
+
+
+
 
 
 def signup(request):
-
-    # if request.method =='POST':
-    #     Firstname= request.POST['firstname']
-    #     Lastname= request.POST['lastname']
-    #     Email= request.POST['Email']
-    #     Password= request.POST['password']
-
-
-    #     if User.objects.filter(Email='email').exists():
-    #         messages.info(request,'Email Taken')
-    #         return render('signup')
-    #     elif User.objects.filter(Firstname='firstname').exists():
-    #             messages.info(request,'Username Taken')
-    #             return render('signup')
-    #     else:
-    #             user = User.objects.create_user(Firstname='firstname', Email='email', Password='password')
-    #             user.save()
-
-    #     #log user in and redirect to settings page 
-    #     user_login= auth.authenticate(Firstname='firstname', Password='password')
-    #     auth.login(request,user_login)
-
-    #     #create profile obj for new user
-    #     user_model=User.objects.get(Firstname='first_name')
-    #     new_Patient = Patient.objects.create(last_name=user_model.first_name)
-    #     new_Patient.save()
-    #     return render('signin')
-        
-
-        
-    # else:
-        return render(request,'signup.html',{})
+    if request.method == "POST":
+        form = signUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            messages.success(request, "Registration successful." )
+            return redirect("home")
+        messages.error(request, "Unsuccessful registration. Invalid information.")
+    form = signUpForm()
+    return render (request=request, template_name="signup.html", context={"signUpForm":form})
 
 def contact(request):
     return render(request,'contact.html',{})
