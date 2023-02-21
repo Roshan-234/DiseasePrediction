@@ -10,7 +10,12 @@
     {% include 'navbar.html' %}
 
     <!-- END nav -->
-    <form class="container col-md-6">
+
+
+    <form class="container col-md-6" method="post" action="{% url 'heartdisease' %}" role="form"
+        novalidate="novalidate">
+        {% csrf_token %}
+
         <div class="form-group">
             <label for="age">Age:</label>
             <input type="number" class="form-control" id="age">
@@ -23,8 +28,8 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="cp">Chest Pain:</label>
-            <select class="form-control" id="cp">
+            <label for="chestPain">Chest Pain:</label>
+            <select class="form-control" id="chestPain">
                 <option value="0">0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -32,42 +37,42 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="trestbps">Resting Blood Pressure:</label>
-            <input type="number" class="form-control" id="trestbps">
+            <label for="restingBloodPressure">Resting Blood Pressure:</label>
+            <input type="number" class="form-control" id="restingBloodPressure">
         </div>
         <div class="form-group">
-            <label for="chol">Cholesterol:</label>
-            <input type="number" class="form-control" id="chol">
+            <label for="cholesterol">Cholesterol:</label>
+            <input type="number" class="form-control" id="cholesterol">
         </div>
         <div class="form-group">
-            <label for="fbs">Fasting Blood Sugar:</label>
-            <select class="form-control" id="sex">
+            <label for="fastingBloodSugar">Fasting Blood Sugar:</label>
+            <select class="form-control" id="fastingBloodSugar">
                 <option value="true">True</option>
                 <option value="false">False</option>
             </select>
         </div>
         <div class="form-group">
-            <label for="restecg">Resting Electro Cardiographic:</label>
-            <select class="form-control" id="restecg">
+            <label for="restingElectrocardiographic">Resting Electro Cardiographic:</label>
+            <select class="form-control" id="restingElectrocardiographic">
                 <option value="0">0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
             </select>
         </div>
         <div class="form-group">
-            <label for="thalach">Maximum Heart Rate:</label>
-            <input type="number" class="form-control" id="thalach">
+            <label for="maximumHeartRate">Maximum Heart Rate:</label>
+            <input type="number" class="form-control" id="maximumHeartRate">
         </div>
         <div class="form-group">
-            <label for="exang">Exercise Induced Angina:</label>
-            <select class="form-control" id="exang">
+            <label for="ExerciseInducedAngina">Exercise Induced Angina:</label>
+            <select class="form-control" id="ExerciseInducedAngina">
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
             </select>
         </div>
         <div class="form-group">
-            <label for="oldpeak">ST depression:</label>
-            <input type="number" class="form-control" id="oldpeak">
+            <label for="STdepression">ST depression:</label>
+            <input type="number" class="form-control" id="STdepression">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

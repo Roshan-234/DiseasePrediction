@@ -10,6 +10,8 @@ from django.contrib import messages
 from django.utils import timezone
 from hospitalApp.models import contactEnquiry
 from .models import Appointment
+from .models import HeartDisease
+
 # from .models import Patient
 from django.contrib.auth.decorators import login_required
 
@@ -27,7 +29,23 @@ def braintumor(request):
 
 
 def heartdisease(request):
-    return render(request,'heartdisease.html',{})
+    if request.method == "POST":
+        print(request.POST)
+        age = request.POST.get('age')
+        sex = request.POST.get('sex')
+        chestPain = request.POST.get('cp')
+        trestbps = request.POST.get('trestbps')
+        chol = request.POST.get('chol')
+        fbs = request.POST.get('fbs')
+        restecg = request.POST.get('restecg')
+        maximumHeartRate = request.POST.get('maximumHeartRate')
+        ExerciseInducedAngina = request.POST.get('ExerciseInducedAngina')
+        STdepression = request.POST.get('STdepression')
+        # here left side is the model field name .........
+        en=HeartDisease(age = age, sex = sex, chestPain = chestPain, restingBloodPressure = trestbps, cholesterol = chol , fastingBloodSugar = fbs , restingElectrocardiographic = restecg , maximumHeartRate = maximumHeartRate, ExerciseInducedAngina = ExerciseInducedAngina  , STdepression = STdepression)
+
+        en.save()
+    return render(request,'heartdisease.html')
 
 
 def breastcancer(request):
@@ -72,6 +90,7 @@ def save_appointment(request):
         
         
     return render(request, 'appointment.html')
+    
     
 
 
