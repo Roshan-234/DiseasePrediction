@@ -13,9 +13,11 @@ urlpatterns = [
     path('contact',views.contact,name="contact"),
     path('services',views.services,name="services"),
     path('diabetes',views.diabetes,name="diabetes"),
+    path('diabetesprediction',views.diabetesprediction,name="diabetesprediction"),
     path('braintumor',views.braintumor,name="braintumor"),
     path('breastcancer',views.breastcancer,name="breastcancer"),
-    path('heartdisease',views.heartdisease,name="heartdisease")
+    path('heartdisease',views.heartdisease,name="heartdisease"),
+    path('heartdiseasePrediction',views.heartdiseasePrediction,name="heartdiseasePrediction")
     # path('about',views.about,name="about"),
          
 ]

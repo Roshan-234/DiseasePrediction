@@ -12,6 +12,13 @@ from hospitalApp.models import contactEnquiry
 from .models import Appointment
 from .models import HeartDisease
 
+# from sklearn.externals import joblib
+import joblib
+import numpy as np
+
+
+
+
 # from .models import Patient
 from django.contrib.auth.decorators import login_required
 
@@ -27,25 +34,68 @@ def diabetes(request):
 def braintumor(request):
     return render(request,'braintumor.html',{})
 
-
 def heartdisease(request):
-    if request.method == "POST":
-        print(request.POST)
-        age = request.POST.get('age')
-        sex = request.POST.get('sex')
-        chestPain = request.POST.get('cp')
-        trestbps = request.POST.get('trestbps')
-        chol = request.POST.get('chol')
-        fbs = request.POST.get('fbs')
-        restecg = request.POST.get('restecg')
-        maximumHeartRate = request.POST.get('maximumHeartRate')
-        ExerciseInducedAngina = request.POST.get('ExerciseInducedAngina')
-        STdepression = request.POST.get('STdepression')
-        # here left side is the model field name .........
-        en=HeartDisease(age = age, sex = sex, chestPain = chestPain, restingBloodPressure = trestbps, cholesterol = chol , fastingBloodSugar = fbs , restingElectrocardiographic = restecg , maximumHeartRate = maximumHeartRate, ExerciseInducedAngina = ExerciseInducedAngina  , STdepression = STdepression)
+    return render(request,'heartdisease.html',{})
 
-        en.save()
-    return render(request,'heartdisease.html')
+
+def diabetes(request):
+    return render(request,'diabetes.html',{})
+
+
+def heartdiseasePrediction(request):
+    model = joblib.load('heartdisease.pkl')
+    age = int(request.POST.get('age'))
+    sex = int(request.POST.get('sex'))
+    chestPain = int(request.POST.get('chestPain'))
+    restingBloodPressure = int(request.POST.get('restingBloodPressure'))
+    cholesterol = int(request.POST.get('cholesterol'))
+    fastingBloodSugar = int(request.POST.get('fastingBloodSugar'))
+    restingElectrocardiographic = int(request.POST.get('restingElectrocardiographic'))
+    maximumHeartRate = int(request.POST.get('maximumHeartRate'))
+    ExerciseInducedAngina = int(request.POST.get('ExerciseInducedAngina'))
+    STdepression = float(request.POST.get('STdepression'))
+    slope = int(request.POST.get('slope'))
+    ca = int(request.POST.get('ca'))
+    thal = int(request.POST.get('thal'))
+   
+    X = np.array([[age, sex, chestPain, restingBloodPressure, cholesterol, fastingBloodSugar, restingElectrocardiographic, maximumHeartRate, ExerciseInducedAngina, STdepression, slope, ca, thal]])
+    print(X)
+    prediction = model.predict(X)
+    
+    if prediction[0] == 0:
+        result = 'Your heart is healthy'
+    else:
+        result = 'Your heart is unhealthy'
+        
+    return render(request, 'heartdiseaseresult.html', {'result': result})
+
+
+
+
+
+def diabetesprediction(request):
+    model = joblib.load('diabetes_model.pkl')
+    pregnancies = int(request.POST.get('pregnancies'))
+    glucose = int(request.POST.get('glucose'))
+    bp = int(request.POST.get('bp'))
+    st = int(request.POST.get('st'))
+    insulin = int(request.POST.get('insulin'))
+    bmi = int(request.POST.get('bmi'))
+    dp = int(request.POST.get('dp'))
+    age = int(request.POST.get('age'))
+    
+    X = np.array([[pregnancies, glucose, bp, st, insulin, bmi, dp, age]])
+    print(X)
+    prediction = model.predict(X)
+    
+    if prediction[0] == 0:
+        result = 'Congratulations! You dont have Diabetes'
+    else:
+        result = 'Sorry!! you have Diabetes'
+    return render(request, 'diabetesresult.html', {'result': result})
+
+
+
 
 
 def breastcancer(request):
