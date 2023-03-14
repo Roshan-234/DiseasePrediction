@@ -16,6 +16,7 @@ urlpatterns = [
     path('diabetesprediction',views.diabetesprediction,name="diabetesprediction"),
     path('braintumor',views.braintumor,name="braintumor"),
     path('breastcancer',views.breastcancer,name="breastcancer"),
+    path('breastcancerPrediction',views.breastcancerPrediction,name="breastcancerPrediction"),
     path('heartdisease',views.heartdisease,name="heartdisease"),
     path('heartdiseasePrediction',views.heartdiseasePrediction,name="heartdiseasePrediction")
     # path('about',views.about,name="about"),

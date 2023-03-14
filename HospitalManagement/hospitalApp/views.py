@@ -37,9 +37,60 @@ def braintumor(request):
 def heartdisease(request):
     return render(request,'heartdisease.html',{})
 
+def breastcancer(request):
+    return render(request,'breastcancer.html',{})
 
-def diabetes(request):
-    return render(request,'diabetes.html',{})
+
+def breastcancerPrediction(request):
+    model = joblib.load('breastcancer_model.pkl')
+    
+    radius = int(request.POST.get('radius'))
+    texture = int(request.POST.get('texture'))
+    perimeter = int(request.POST.get('perimeter'))
+    area = int(request.POST.get('area'))
+    smoothness = int(request.POST.get('smoothness'))
+    compactness = int(request.POST.get('compactness'))
+    concavity = int(request.POST.get('concavity'))
+    concavePoints = int(request.POST.get('concavePoints'))
+    symmetry = int(request.POST.get('symmetry'))
+    fractalDimemsion = int(request.POST.get('fractalDimemsion'))
+    
+    radiusse = int(request.POST.get('radiusse'))
+    texturese = int(request.POST.get('texturese'))
+    perimeterse = int(request.POST.get('perimeterse'))
+    arease = int(request.POST.get('arease'))
+    smoothnessse = int(request.POST.get('smoothnessse'))
+    compactnessse = int(request.POST.get('compactnessse'))
+    concavityse = int(request.POST.get('concavityse'))
+    concavePointsse = int(request.POST.get('concavePointsse'))
+    symmetryse = int(request.POST.get('symmetryse'))
+    fractalDimemsionse = int(request.POST.get('fractalDimemsionse'))
+    
+    radiusWorst = int(request.POST.get('radiusWorst'))
+    textureWorst = int(request.POST.get('textureWorst'))
+    perimeterWorst = int(request.POST.get('perimeterWorst'))
+    areaWorst = int(request.POST.get('areaWorst'))
+    smoothnessWorst = int(request.POST.get('smoothnessWorst'))
+    compactnessWorst = int(request.POST.get('compactnessWorst'))
+    concavityWorst = int(request.POST.get('concavityWorst'))
+    concavePointsWorst = int(request.POST.get('concavePointsWorst'))
+    symmetryWorst = int(request.POST.get('symmetryWorst'))
+    fractalDimemsionWorst = int(request.POST.get('fractalDimemsionWorst'))
+    
+    
+    X = np.array([[radius, texture, perimeter, area, smoothness, compactness, concavity, concavePoints, symmetry, fractalDimemsion,
+                   radiusse, texturese, perimeterse, arease, smoothnessse, compactnessse, concavityse, concavePointsse, symmetryse, fractalDimemsionse, 
+                   radiusWorst, textureWorst, perimeterWorst, areaWorst, smoothnessWorst, compactnessWorst, concavityWorst, concavePointsWorst, symmetryWorst, fractalDimemsionWorst]])
+    print(X)
+    prediction = model.predict(X)
+    
+    if prediction[0] == 0:
+        result = 'Your cancer is Benign'
+    else:
+        result = 'Your Cancer is Melignant'
+        
+    return render(request, 'breasecancerresult.html', {'result': result})
+
 
 
 def heartdiseasePrediction(request):
