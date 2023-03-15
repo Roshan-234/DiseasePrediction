@@ -240,6 +240,13 @@ def contact(request):
 def services(request):
     return render(request,'services.html',{})
 
+def doctors(request):
+    return render(request,'doctors.html',{})
+
+
+def about(request):
+    return render(request,'about.html',{})
+
 # def createAppointment(request):
 #      if request.method == 'POST':
 #           if request.POST.get('name') and request.POST.get('email') and request.POST.get('date')and request.POST.get('time'):
